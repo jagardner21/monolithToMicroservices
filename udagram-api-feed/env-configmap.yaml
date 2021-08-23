@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+  AWS_BUCKET: udagram-gard-dev
+  AWS_PROFILE: Admin
+  AWS_REGION: us-west-1
+  JWT_SECRET: eerwyioudgisdfnfdiangpomrsijdfn
+  POSTGRES_DATABASE: postgres
+  POSTGRES_HOST: udagramgarddev.ckrnoy1cqvex.us-west-1.rds.amazonaws.com
+  URL: a09dc7e061536440fb04424bad3f2ad7-1117717004.us-west-1.elb.amazonaws.com
+metadata:
+  name: env-config

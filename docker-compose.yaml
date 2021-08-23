@@ -1,0 +1,40 @@
+version: "3"
+services:
+  udagram-reverseproxy:
+      image: jagardner21/udagram-reverseproxy:latest
+      ports:
+          - 8080:8080
+      restart: always
+      depends_on:
+        - udagram-api-feed
+        - udagram-api-user
+  udagram-api-user:
+    image: jagardner21/udagram-api-user:latest
+    environment:
+      POSTGRES_USERNAME: $POSTGRES_USERNAME
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
+      POSTGRES_DATABASE: $POSTGRES_DATABASE 
+      POSTGRES_HOST: $POSTGRES_HOST
+      AWS_REGION: $AWS_REGION 
+      AWS_PROFILE: $AWS_PROFILE 
+      AWS_BUCKET: $AWS_BUCKET
+      JWT_SECRET: $JWT_SECRET
+      URL: "http://localhost:8100"
+  udagram-api-feed:
+    image: jagardner21/udagram-api-feed:latest
+    volumes:
+      - $HOME/.aws:/root/.aws
+    environment:
+      POSTGRES_USERNAME: $POSTGRES_USERNAME
+      POSTGRES_PASSWORD: $POSTGRES_PASSWORD 
+      POSTGRES_DATABASE: $POSTGRES_DATABASE
+      POSTGRES_HOST: $POSTGRES_HOST
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE 
+      AWS_BUCKET: $AWS_BUCKET
+      JWT_SECRET: $JWT_SECRET
+      URL: "http://localhost:8100"
+  udagram-frontend:
+    image: jagardner21/udagram-frontend:latest
+    ports:
+      - "8100:80"
