@@ -32,7 +32,7 @@ $RECYCLE.BIN/
 postgres_dev/
 logfile
 
-./aws-secret.yaml
+udagram-api-feed/aws-secret.yaml
 
 .DS_Store
 Thumbs.db
